@@ -1,1 +1,128 @@
+<html>
+    
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no">
 
+<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+
+<script src="https://gitcdn.xyz/repo/ks1505/xr/master/manipulate/gesture-detector.js"></script>
+<!--<script src="https://rawcdn.githack.com/ks1505/superframe/0a49737e45779fc926912970b2980770040f15ec/components/orbit-controls/dist/aframe-orbit-controls.min.js"></script>-->
+    <script src="https://gitcdn.xyz/repo/ks1505/xr/master/manipulate/gesture-detector.js"></script>
+
+    <script src="https://gitcdn.xyz/repo/ks1505/xr/master/manipulate/pinch-scale.js"></script>
+    <script src="https://gitcdn.xyz/repo/ks1505/xr/master/manipulate/two-finger-spin.js"></script>
+    <script defer src="https://unpkg.com/aframe-animation-component@5.1.2/dist/aframe-animation-component.min.js"></script>
+    <script src="https://gitcdn.xyz/repo/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"> </script>
+<script src="hold-drag.js"></script>
+  
+
+
+</head>
+<style>
+
+  .a-enter-vr-button, .a-enter-vr-modal, .a-enter-vr-modal a {
+    color: #fff;
+    display: none;
+}
+  div#arjsDebugUIContainer {
+    display: none;
+      
+  }
+  
+
+</style>
+<body>
+  
+  <a-scene  gesture-detector embedded arjs renderer="precision: mediump">
+
+    <script>document.querySelector('a-scene').enterVR()</script>
+    <script>document.querySelector('a-scene').exitVR()</script>
+    <script>
+          (function(){
+        window.addEventListener('deviceorientation', function(evt){
+            document.getElementById('ori-a').innerText = evt.alpha;
+            document.getElementById('ori-b').innerText = evt.beta;
+            document.getElementById('ori-g').innerText = evt.gamma;
+        }, true);
+
+        window.addEventListener('devicemotion', function(){
+            var acc = event.acceleration;
+            document.getElementById('acc-a').innerText = acc.x;
+            document.getElementById('acc-b').innerText = acc.y;
+            document.getElementById('acc-g').innerText = acc.z;
+
+        }, true);
+    })();
+        AFRAME.registerComponent('acccam',{
+           tick: function (){
+             window.addEventListener('devicemotion', function(){
+              var acc = event.acceleration;
+   
+              this.el.object3D.position.x += acc.x*9.8;
+              this.el.object3D.position.y += acc.y*9.8;
+              this.el.object3D.position.z += acc.z*9.8;
+            
+
+        }, true);
+  })
+  }
+    </script><!--   <script>
+      AFRAME.registerComponent('acccam',{
+        window.addEventListener('devicemotion', function(){
+        var acc = event.acceleration;
+        var el = this.el;
+        var positionTmp = this.positionTmp = this.positionTmp || {x: 0, y: 0, z: 0};
+        var position = this.el.getAttribute('position');
+        tick: function (){
+          
+        
+        positionTmp.x = position.x + acc.x*10;
+        positionTmp.y = position.y + acc.y*10;
+        positionTmp.z = position.z + acc.z*10;
+        }
+        this.el.setAttribute('position', positionTmp);
+        });
+      })
+
+    </script>-->
+    <a-assets>
+        <a-asset-item id="sofa" src="https://raw.githubusercontent.com/ks1505/ma/master/sofa.glb"></a-asset-item>
+      </a-assets>
+    <a-entity gltf-model="#sofa" class="cantap" hold-drag two-finger-spin pinch-scale position="0 -2 5" rotation="0 90 0" scale="1 1 1"></a-entity>
+  <a-entity acccam position="0 0 0">
+  <a-camera
+        
+        look-controls="touchEnabled:false"
+        id="camera"
+        position="0 0 0"
+                 
+        raycaster="objects: .cantap"
+        cursor="
+          fuse: false;
+          rayOrigin: mouse;">
+        
+      </a-camera>
+    </a-entity>
+  <a-entity
+        light="type: directional;
+               intensity: 0.8;"
+        position="1 4.3 2.5">
+      </a-entity>
+
+      <a-light type="ambient" intensity="1"></a-light>
+    
+        
+        
+        <a-entity
+                  
+        id="ground"
+        class="cantap"
+        geometry="primitive: box"
+        material="color: #ffffff; transparent: true; opacity: 0.0"
+        scale="1000 2 1000"
+        position="0 -3 0">
+        </a-entity>
+    </a-scene>    
+
+</body>
+  </html>

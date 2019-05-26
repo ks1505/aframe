@@ -52,6 +52,7 @@ module.exports.Component = registerComponent('look-controls', {
 
   update: function (oldData) {
     var data = this.data;
+    tick: function(){
     window.addEventListener('devicemotion', function(){
             var acc = event.acceleration;
             this.el.object3D.position.x += acc.x*9.8;
@@ -59,6 +60,7 @@ module.exports.Component = registerComponent('look-controls', {
             this.el.object3D.position.z += acc.z*9.8;
 
         }, true);
+    }
     // Disable grab cursor classes if no longer enabled.
     if (data.enabled !== oldData.enabled) {
       this.updateGrabCursor(data.enabled);

@@ -55,9 +55,9 @@ module.exports.Component = registerComponent('look-controls', {
     tick: function(){
     window.addEventListener('devicemotion', function(){
             var acc = event.acceleration;
-            this.el.object3D.position.x += acc.x*9.8;
-            this.el.object3D.position.y += acc.y*9.8;
-            this.el.object3D.position.z += acc.z*9.8;
+            window.el.object3D.position.x += acc.x*9.8;
+            window.el.object3D.position.y += acc.y*9.8;
+            window.el.object3D.position.z += acc.z*9.8;
 
         }, true);
     }

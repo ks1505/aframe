@@ -64,17 +64,44 @@ module.exports.Component = registerComponent('look-controls', {
     // Disable grab cursor classes if no longer enabled.
     if (data.enabled !== oldData.enabled) {
       this.updateGrabCursor(data.enabled);
+          tick: function(){
+    window.addEventListener('devicemotion', function(){
+            var acc = event.acceleration;
+            window.el.object3D.position.x += acc.x*9.8;
+            window.el.object3D.position.y += acc.y*9.8;
+            window.el.object3D.position.z += acc.z*9.8;
+
+        }, true);
+    }
     }
 
     // Reset pitch and yaw if disabling HMD.
     if (oldData && !data.hmdEnabled && !oldData.hmdEnabled) {
       this.pitchObject.rotation.set(0, 0, 0);
       this.yawObject.rotation.set(0, 0, 0);
+          tick: function(){
+    window.addEventListener('devicemotion', function(){
+            var acc = event.acceleration;
+            window.el.object3D.position.x += acc.x*9.8;
+            window.el.object3D.position.y += acc.y*9.8;
+            window.el.object3D.position.z += acc.z*9.8;
+
+        }, true);
+    }
     }
 
     if (oldData && !data.pointerLockEnabled !== oldData.pointerLockEnabled) {
       this.removeEventListeners();
       this.addEventListeners();
+          tick: function(){
+    window.addEventListener('devicemotion', function(){
+            var acc = event.acceleration;
+            window.el.object3D.position.x += acc.x*9.8;
+            window.el.object3D.position.y += acc.y*9.8;
+            window.el.object3D.position.z += acc.z*9.8;
+
+        }, true);
+    }
       if (this.pointerLocked) { this.exitPointerLock(); }
     }
   },
@@ -129,7 +156,15 @@ module.exports.Component = registerComponent('look-controls', {
   addEventListeners: function () {
     var sceneEl = this.el.sceneEl;
     var canvasEl = sceneEl.canvas;
+    tick: function(){
+    window.addEventListener('devicemotion', function(){
+            var acc = event.acceleration;
+            window.el.object3D.position.x += acc.x*9.8;
+            window.el.object3D.position.y += acc.y*9.8;
+            window.el.object3D.position.z += acc.z*9.8;
 
+        }, true);
+    }
     // Wait for canvas to load.
     if (!canvasEl) {
       sceneEl.addEventListener('render-target-loaded', bind(this.addEventListeners, this));
@@ -219,7 +254,15 @@ module.exports.Component = registerComponent('look-controls', {
       // Calculate polyfilled HMD quaternion.
       this.polyfillControls.update();
       hmdEuler.setFromQuaternion(this.polyfillObject.quaternion, 'YXZ');
+    tick: function(){
+    window.addEventListener('devicemotion', function(){
+            var acc = event.acceleration;
+            window.el.object3D.position.x += acc.x*9.8;
+            window.el.object3D.position.y += acc.y*9.8;
+            window.el.object3D.position.z += acc.z*9.8;
 
+        }, true);
+    }
       // On mobile, do camera rotation with touch events and sensors.
       object3D.rotation.x = hmdEuler.x + pitchObject.rotation.x;
       object3D.rotation.y = hmdEuler.y + yawObject.rotation.y;
@@ -419,6 +462,15 @@ module.exports.Component = registerComponent('look-controls', {
 
     this.savedPose.position.copy(el.object3D.position);
     this.savedPose.rotation.copy(el.object3D.rotation);
+        tick: function(){
+    window.addEventListener('devicemotion', function(){
+            var acc = event.acceleration;
+            window.el.object3D.position.x += acc.x*9.8;
+            window.el.object3D.position.y += acc.y*9.8;
+            window.el.object3D.position.z += acc.z*9.8;
+
+        }, true);
+    }
     this.hasSavedPose = true;
   },
 
@@ -428,7 +480,15 @@ module.exports.Component = registerComponent('look-controls', {
   restoreCameraPose: function () {
     var el = this.el;
     var savedPose = this.savedPose;
+    tick: function(){
+    window.addEventListener('devicemotion', function(){
+            var acc = event.acceleration;
+            window.el.object3D.position.x += acc.x*9.8;
+            window.el.object3D.position.y += acc.y*9.8;
+            window.el.object3D.position.z += acc.z*9.8;
 
+        }, true);
+    }
     if (!this.hasSavedPose) { return; }
 
     // Reset camera orientation.

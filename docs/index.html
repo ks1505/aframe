@@ -58,9 +58,9 @@
              window.addEventListener('devicemotion', function(){
               var acc = event.acceleration;
               var ax,ay,az;
-              this.el.object3D.position.x += acc.x*9.8;
-              this.el.object3D.position.y += acc.y*9.8;
-              this.el.object3D.position.z += acc.z*9.8;
+              window.el.object3D.position.x += acc.x*9.8;
+              window.el.object3D.position.y += acc.y*9.8;
+              window.el.object3D.position.z += acc.z*9.8;
               //document.getElementById('camera').setAttribute('position', 'ax ay az')
 
         }, true);

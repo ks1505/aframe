@@ -55,18 +55,26 @@
     })();*/
         AFRAME.registerComponent('acccam',{
            tick: function (){
-             window.addEventListener('devicemotion', function(){
-              var acc = event.acceleration;
-              var ax=0;
-              var ay=0;
-              var az=0;
-              ax += acc.x*9.8;
-              ay += acc.y*9.8;
-              az += acc.z*9.8;
-              document.getElementById('camera').setAttribute('position', 'ax ay az')
-
-        }, true);
-  }
+               window.addEventListener('devicemotion', function(){
+                   var acc = event.acceleration;
+                   var ax=0;
+                   var ay=0;
+                   var az=0;
+                   ax += acc.x*9.8;
+                   ay += acc.y*9.8;
+                   az += acc.z*9.8;
+                   document.getElementById('camera').setAttribute('position', 'ax ay az')
+               }, true);
+               window.addEventListener('deviceorientation', function(evt){
+                   var oal=0;
+                   var obe=0;
+                   var oga=0;
+                   oal = evt.alpha;
+                   obe = evt.beta;
+                   oga = evt.gamma;
+                   document.getElementById('camera').setAttribute('rotation', 'oal obe oga')            
+               }, true);  
+           }
   })
     </script><!--   <script>
       AFRAME.registerComponent('acccam',{

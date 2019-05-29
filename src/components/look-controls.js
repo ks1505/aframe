@@ -52,21 +52,21 @@ module.exports.Component = registerComponent('look-controls', {
 
   update: function (oldData) {
     var data = this.data;
-    
+
     // Disable grab cursor classes if no longer enabled.
     if (data.enabled !== oldData.enabled) {
       this.updateGrabCursor(data.enabled);
-          
+    }
+
     // Reset pitch and yaw if disabling HMD.
     if (oldData && !data.hmdEnabled && !oldData.hmdEnabled) {
       this.pitchObject.rotation.set(0, 0, 0);
       this.yawObject.rotation.set(0, 0, 0);
-          
+    }
 
     if (oldData && !data.pointerLockEnabled !== oldData.pointerLockEnabled) {
       this.removeEventListeners();
       this.addEventListeners();
-          
       if (this.pointerLocked) { this.exitPointerLock(); }
     }
   },
@@ -121,7 +121,7 @@ module.exports.Component = registerComponent('look-controls', {
   addEventListeners: function () {
     var sceneEl = this.el.sceneEl;
     var canvasEl = sceneEl.canvas;
-    
+
     // Wait for canvas to load.
     if (!canvasEl) {
       sceneEl.addEventListener('render-target-loaded', bind(this.addEventListeners, this));
@@ -211,7 +211,7 @@ module.exports.Component = registerComponent('look-controls', {
       // Calculate polyfilled HMD quaternion.
       this.polyfillControls.update();
       hmdEuler.setFromQuaternion(this.polyfillObject.quaternion, 'YXZ');
-   
+
       // On mobile, do camera rotation with touch events and sensors.
       object3D.rotation.x = hmdEuler.x + pitchObject.rotation.x;
       object3D.rotation.y = hmdEuler.y + yawObject.rotation.y;
@@ -411,7 +411,6 @@ module.exports.Component = registerComponent('look-controls', {
 
     this.savedPose.position.copy(el.object3D.position);
     this.savedPose.rotation.copy(el.object3D.rotation);
-     
     this.hasSavedPose = true;
   },
 
@@ -421,7 +420,7 @@ module.exports.Component = registerComponent('look-controls', {
   restoreCameraPose: function () {
     var el = this.el;
     var savedPose = this.savedPose;
-    
+
     if (!this.hasSavedPose) { return; }
 
     // Reset camera orientation.

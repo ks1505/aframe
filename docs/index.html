@@ -33,7 +33,7 @@
 </style>
 <body>
   
-  <a-scene acccam gesture-detector embedded arjs renderer="precision: mediump">
+  <a-scene look-controls="enabled: false" gesture-detector embedded arjs renderer="precision: mediump">
 
     <script>document.querySelector('a-scene').enterVR()</script>
     <script>document.querySelector('a-scene').exitVR()</script>
@@ -92,7 +92,7 @@
   <a-entity position="0 0 0">
   <a-camera
         
-        
+        acccam
         id="camera"
         position="0 0 0"
                  

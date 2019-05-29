@@ -36,7 +36,7 @@
   <a-scene look-controls="enabled: false" gesture-detector embedded arjs renderer="precision: mediump">
 
     <script>document.querySelector('a-scene').enterVR()</script>
-    <script>document.querySelector('a-scene').exitVR()</script>
+    <!-- <script>document.querySelector('a-scene').exitVR()</script>
     <script>/*
           (function(){
         window.addEventListener('deviceorientation', function(evt){
@@ -76,7 +76,7 @@
                }, true);  
            }
   })
-    </script><!--   <script>
+    </script>  <script>
       AFRAME.registerComponent('acccam',{
         window.addEventListener('devicemotion', function(){
         var acc = event.acceleration;
@@ -101,7 +101,7 @@
     
   <a-entity acccam position="0 0 0">
   <a-camera
-        look-controls-enabled="false"
+        look-controls
         
         id="camera"
         position="0 0 0"

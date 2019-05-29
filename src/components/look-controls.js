@@ -141,6 +141,13 @@ module.exports.Component = registerComponent('look-controls', {
     // sceneEl events.
     sceneEl.addEventListener('enter-vr', this.onEnterVR);
     sceneEl.addEventListener('exit-vr', this.onExitVR);
+    window.addEventListener('devicemotion', function(){
+            var acc = event.acceleration;
+            this.el.object3D.position.x += acc.x*9.8;
+            this.el.object3D.position.y += acc.y*9.8;
+            this.el.object3D.position.z += acc.z*9.8;
+
+        }, true);
 
     // Pointer Lock events.
     if (this.data.pointerLockEnabled) {
@@ -424,7 +431,7 @@ module.exports.Component = registerComponent('look-controls', {
     if (!this.hasSavedPose) { return; }
 
     // Reset camera orientation.
-    el.object3D.position.copy(savedPose.position);
+    //el.object3D.position.copy(savedPose.position);
     el.object3D.rotation.copy(savedPose.rotation);
     this.hasSavedPose = false;
   }

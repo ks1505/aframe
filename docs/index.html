@@ -57,11 +57,13 @@
            tick: function (){
              window.addEventListener('devicemotion', function(){
               var acc = event.acceleration;
-              var ax,ay,az;
-              window.el.object3D.position.x += acc.x*9.8;
-              window.el.object3D.position.y += acc.y*9.8;
-              window.el.object3D.position.z += acc.z*9.8;
-              //document.getElementById('camera').setAttribute('position', 'ax ay az')
+              var ax=0;
+              var ay=0;
+              var az=0;
+              ax += acc.x*9.8;
+              ay += acc.y*9.8;
+              az += acc.z*9.8;
+              document.getElementById('camera').setAttribute('position', 'ax ay az')
 
         }, true);
   }
@@ -91,7 +93,7 @@
     <a-entity gltf-model="#sofa" class="cantap" hold-drag two-finger-spin pinch-scale position="0 -2 5" rotation="0 90 0" scale="1 1 1"></a-entity>
   <a-entity acccam position="0 0 0">
   <a-camera
-        look-controls="enabled: false"
+        look-controls-enabled="false"
         
         id="camera"
         position="0 0 0"

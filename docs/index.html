@@ -49,7 +49,7 @@
             document.getElementById('acc-g').innerText = acc.z;
         }, true);
     })();*/
-        setAttribute('look-controls', 'enabled', false)
+        document.getElementById('camera').setAttribute('look-controls', 'enabled', false)
         AFRAME.registerComponent('acccam',{
            tick: function (){
                window.addEventListener('devicemotion', function(){

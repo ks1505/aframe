@@ -38,7 +38,7 @@
                    ax += acc.x*9.8;
                    ay += acc.y*9.8;
                    az += acc.z*9.8;
-                   document.getElementById("camera").setAttribute('position', 'ax ay az')
+                   document.getElementById('camera').setAttribute('position', 'ax ay az')
                });
               window.addEventListener('deviceorientation', function(evt){
                    var oal=0;
@@ -47,7 +47,7 @@
                    oal = evt.alpha;
                    obe = evt.beta;
                    oga = evt.gamma;
-                   document.getElementById("camera").setAttribute('rotation', 'oal obe oga')            
+                   document.getElementById('camera').setAttribute('rotation', 'oal obe oga')            
                });  
            }
         })
@@ -69,7 +69,7 @@
 </style>
 <body>
   
-  <a-scene look-controls-enabled="false" acccam gesture-detector embedded arjs renderer="precision: mediump">
+  <a-scene acccam gesture-detector embedded arjs renderer="precision: mediump">
 
     <script>document.querySelector('a-scene').enterVR()</script>
     <!-- <script>document.querySelector('a-scene').exitVR()</script>-->
@@ -99,7 +99,7 @@
     
   <a-entity acccam position="0 0 0">
   <a-camera
-        
+        look-controls-enabled="false"
         
         id="camera"
         position="0 0 0"

@@ -28,7 +28,6 @@
             document.getElementById('acc-g').innerText = acc.z;
         }, true);
     })();*/
-        document.getElementById("ascmain").setAttribute('look-controls', 'enabled', false)
         AFRAME.registerComponent('acccam',{
            tick: function (){
                window.addEventListener('devicemotion', function(){
@@ -39,7 +38,7 @@
                    ax += acc.x*9.8;
                    ay += acc.y*9.8;
                    az += acc.z*9.8;
-                   window.setAttribute('position', 'ax ay az')
+                   document.getElementById("camera").setAttribute('position', 'ax ay az')
                });
               window.addEventListener('deviceorientation', function(evt){
                    var oal=0;
@@ -70,7 +69,7 @@
 </style>
 <body>
   
-  <a-scene id="ascmain" acccam gesture-detector embedded arjs renderer="precision: mediump">
+  <a-scene look-controls-enabled="false" acccam gesture-detector embedded arjs renderer="precision: mediump">
 
     <script>document.querySelector('a-scene').enterVR()</script>
     <!-- <script>document.querySelector('a-scene').exitVR()</script>-->

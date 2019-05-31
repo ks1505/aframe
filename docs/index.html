@@ -13,7 +13,46 @@
     <script src="https://gitcdn.xyz/repo/ks1505/xr/master/manipulate/two-finger-spin.js"></script>
     <script defer src="https://unpkg.com/aframe-animation-component@5.1.2/dist/aframe-animation-component.min.js"></script>
     <script src="https://gitcdn.xyz/repo/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"> </script>
-<script src="hold-drag.js"></script>
+    <script src="hold-drag.js"></script>
+    <script>/*
+          (function(){
+        window.addEventListener('deviceorientation', function(evt){
+            document.getElementById('ori-a').innerText = evt.alpha;
+            document.getElementById('ori-b').innerText = evt.beta;
+            document.getElementById('ori-g').innerText = evt.gamma;
+        }, true);
+        window.addEventListener('devicemotion', function(){
+            var acc = event.acceleration;
+            document.getElementById('acc-a').innerText = acc.x;
+            document.getElementById('acc-b').innerText = acc.y;
+            document.getElementById('acc-g').innerText = acc.z;
+        }, true);
+    })();*/
+        document.getElementById("ascmain").setAttribute('look-controls', 'enabled', false)
+        AFRAME.registerComponent('acccam',{
+           tick: function (){
+               window.addEventListener('devicemotion', function(){
+                   var acc = event.acceleration;
+                   var ax=0;
+                   var ay=0;
+                   var az=0;
+                   ax += acc.x*9.8;
+                   ay += acc.y*9.8;
+                   az += acc.z*9.8;
+                   window.setAttribute('position', 'ax ay az')
+               });
+              window.addEventListener('deviceorientation', function(evt){
+                   var oal=0;
+                   var obe=0;
+                   var oga=0;
+                   oal = evt.alpha;
+                   obe = evt.beta;
+                   oga = evt.gamma;
+                   document.getElementById("camera").setAttribute('rotation', 'oal obe oga')            
+               });  
+           }
+        })
+    </script>
   
 
 
@@ -31,49 +70,11 @@
 </style>
 <body>
   
-  <a-scene gesture-detector embedded arjs renderer="precision: mediump">
+  <a-scene id="ascmain" acccam gesture-detector embedded arjs renderer="precision: mediump">
 
     <script>document.querySelector('a-scene').enterVR()</script>
     <!-- <script>document.querySelector('a-scene').exitVR()</script>-->
-    <script>/*
-          (function(){
-        window.addEventListener('deviceorientation', function(evt){
-            document.getElementById('ori-a').innerText = evt.alpha;
-            document.getElementById('ori-b').innerText = evt.beta;
-            document.getElementById('ori-g').innerText = evt.gamma;
-        }, true);
-        window.addEventListener('devicemotion', function(){
-            var acc = event.acceleration;
-            document.getElementById('acc-a').innerText = acc.x;
-            document.getElementById('acc-b').innerText = acc.y;
-            document.getElementById('acc-g').innerText = acc.z;
-        }, true);
-    })();*/
-        document.getElementById("#camera").setAttribute('look-controls', 'enabled', false)
-        AFRAME.registerComponent('acccam',{
-           tick: function (){
-               window.addEventListener('devicemotion', function(){
-                   var acc = event.acceleration;
-                   var ax=0;
-                   var ay=0;
-                   var az=0;
-                   ax += acc.x*9.8;
-                   ay += acc.y*9.8;
-                   az += acc.z*9.8;
-                   window.setAttribute('position', 'ax ay az')
-               });
-              /* window.addEventListener('deviceorientation', function(evt){
-                   var oal=0;
-                   var obe=0;
-                   var oga=0;
-                   oal = evt.alpha;
-                   obe = evt.beta;
-                   oga = evt.gamma;
-                   document.getElementById('camera').setAttribute('rotation', 'oal obe oga')            
-               }, true);  */
-           }
-  })
-    </script>  <!--<script>
+  <!--<script>
       AFRAME.registerComponent('acccam',{
         window.addEventListener('devicemotion', function(){
         var acc = event.acceleration;

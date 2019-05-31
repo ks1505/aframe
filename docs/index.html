@@ -69,7 +69,7 @@
 </style>
 <body>
   
-  <a-scene acccam gesture-detector embedded arjs renderer="precision: mediump">
+  <a-scene  gesture-detector embedded arjs renderer="precision: mediump">
 
     <script>document.querySelector('a-scene').enterVR()</script>
     <!-- <script>document.querySelector('a-scene').exitVR()</script>-->
@@ -97,7 +97,7 @@
       </a-assets>
   <a-entity gltf-model="#sofa" class="cantap" hold-drag two-finger-spin pinch-scale position="0 -2 5" scale="1 1 1"></a-entity>
     
- 
+ <a-entity acccam position="0 0 0">
   <a-camera
         look-controls-enabled="false"
         
@@ -110,7 +110,7 @@
           rayOrigin: mouse;">
         
       </a-camera>
-      
+      </a-entity>
   <a-entity
         light="type: directional;
                intensity: 0.8;"

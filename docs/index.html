@@ -28,6 +28,7 @@
             document.getElementById('acc-g').innerText = acc.z;
         }, true);
     })();*/
+        /*
         AFRAME.registerComponent('acccam',{
            tick: function (){
                window.addEventListener('devicemotion', function(){
@@ -39,7 +40,7 @@
                    ay += acc.y*9.8;
                    az += acc.z*9.8;
                    document.getElementById('camera').setAttribute('position', 'ax ay az')
-               });/*
+               });
               window.addEventListener('deviceorientation', function(evt){
                    var oal=0;
                    var obe=0;
@@ -48,9 +49,9 @@
                    obe = evt.beta;
                    oga = evt.gamma;
                    document.getElementById('camera').setAttribute('rotation', 'oal obe oga')            
-               });  */
+               });  
            }
-        })
+        })*/
     </script>
   
 
@@ -95,22 +96,17 @@
         <a-asset-item id="sofa" src="https://raw.githubusercontent.com/ks1505/ma/master/sofa.glb"></a-asset-item>
         
       </a-assets>
-  <a-entity gltf-model="#sofa" class="cantap" hold-drag two-finger-spin pinch-scale position="0 -2 5" scale="1 1 1"></a-entity>
+  <a-entity gltf-model="#sofa" class="cantap" hold-drag two-finger-spin pinch-scale position="0 -2 5" rotation="0 90 0" scale="1 1 1"></a-entity>
     
- <a-entity acccam position="0 0 0">
   <a-camera
-        look-controls-enabled="false"
-        
-        id="camera"
-        position="0 0 0"
-                 
-        raycaster="objects: .cantap"
-        cursor="
-          fuse: false;
-          rayOrigin: mouse;">
-        
-      </a-camera>
-      </a-entity>
+            look-controls="touchEnabled:false"
+            id="camera"
+            position="0 0 0"
+            raycaster="objects: .cantap"
+            cursor="
+                    fuse: false;
+                    rayOrigin: mouse;">
+     </a-camera>
   <a-entity
         light="type: directional;
                intensity: 0.8;"
